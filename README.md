@@ -39,6 +39,168 @@ CyberCrawler/ (Parent Repository)
 - **Integration testing** happens at the parent repository level
 - **Cross-system communication** through well-defined interfaces
 
+## 🔄 Updating Submodules
+
+### Quick Update Commands
+
+**Update single submodule to latest commit:**
+```bash
+git submodule update --remote tower-defense
+git add tower-defense
+git commit -m "Update tower-defense to latest version"
+```
+
+**Update all submodules at once:**
+```bash
+git submodule update --remote --merge
+git add .
+git commit -m "Update all submodules to latest"
+```
+
+### Complete Update Workflow
+
+#### Step 1: Check Current Submodule Status
+```bash
+# See current status of all submodules
+git submodule status
+
+# Check which branch each submodule is tracking
+cat .gitmodules
+```
+
+#### Step 2: Update to Latest Commit on Tracked Branch
+```bash
+# Update specific submodule (recommended)
+git submodule update --remote tower-defense
+
+# Alternative: Navigate into submodule and pull directly
+cd tower-defense
+git pull origin main
+cd ..
+```
+
+#### Step 3: Commit the Updated Reference
+```bash
+# Stage the submodule changes
+git add tower-defense
+
+# Commit with descriptive message
+git commit -m "Update tower-defense to latest commit
+
+- Updated to include latest features/fixes from TD repo
+- Version: [insert commit hash or version info]"
+```
+
+#### Step 4: Push Changes
+```bash
+# Push to your current feature branch
+git push origin feature/your-feature-name
+
+# Or push to dev branch after merging
+git push origin dev
+```
+
+### Advanced Submodule Operations
+
+#### Update to Specific Commit
+```bash
+# Method 1: Traditional approach
+cd tower-defense
+git checkout <specific-commit-hash>
+cd ..
+git add tower-defense
+git commit -m "Update tower-defense to specific commit <hash>"
+
+# Method 2: Direct hash update (one-liner)
+git update-index --cacheinfo 160000 <commit-hash> tower-defense
+git commit -m "Update tower-defense to commit <hash>"
+```
+
+#### Initialize Submodules After Fresh Clone
+```bash
+# Clone parent repo with all submodules
+git clone --recursive https://github.com/username/CyberCrawler.git
+
+# Or if already cloned, initialize submodules
+git submodule update --init --recursive
+```
+
+#### Sync Submodule URLs (if changed)
+```bash
+# Sync .gitmodules configuration to .git/config
+git submodule sync --recursive
+
+# Then update to pull from new URLs
+git submodule update --init --recursive
+```
+
+### Best Practices for Submodule Management
+
+#### 1. **Regular Updates**
+- Update submodules regularly to get latest fixes and features
+- Check submodule status before starting new work: `git submodule status`
+- Use descriptive commit messages when updating submodule references
+
+#### 2. **Branch Tracking**
+- Each submodule is configured to track the `main` branch
+- This enables automatic updates with `git submodule update --remote`
+- Branch configuration is stored in `.gitmodules` file
+
+#### 3. **Development Workflow**
+```bash
+# When working on tower defense changes:
+# 1. Make changes in separate tower defense repo
+# 2. Push changes to tower defense repo
+# 3. Update parent repo to reference new commit
+
+# Example workflow:
+cd /path/to/separate/tower-defense-repo
+# Make changes, commit, push
+
+cd /path/to/CyberCrawler
+git submodule update --remote tower-defense
+git add tower-defense
+git commit -m "Update tower-defense: [describe changes]"
+```
+
+#### 4. **Team Collaboration**
+- Always commit submodule reference updates after pulling changes
+- Use `git submodule update --init --recursive` when pulling parent repo changes
+- Communicate submodule updates to team members
+
+#### 5. **Version Control Strategy**
+- Tag important submodule versions for stability
+- Consider pinning submodules to specific commits for releases
+- Use feature branches for experimental submodule updates
+
+### Troubleshooting Common Issues
+
+#### Submodule Changes Not Showing
+```bash
+# Ensure submodule is properly initialized
+git submodule update --init tower-defense
+
+# Check if submodule is in detached HEAD state
+cd tower-defense
+git branch -a
+git checkout main  # if needed
+```
+
+#### Merge Conflicts in Submodules
+```bash
+# If submodule has merge conflicts
+cd tower-defense
+git checkout main  # Reset to clean state
+cd ..
+git add tower-defense
+```
+
+#### Reset Submodule to Clean State
+```bash
+# Reset submodule to match parent repo's recorded commit
+git submodule update --force tower-defense
+```
+
 ## 🎯 Design Pillars
 
 ### 1. The Ghost & The Machine
@@ -61,7 +223,7 @@ The world tells a story of technological oppression and human rebellion through 
 
 ### Phase 2: Multi-Repo Architecture 🚧
 - [x] Parent repository created
-- [ ] Tower defense submodule integration
+- [x] Tower defense submodule integration (tracking main branch)
 - [ ] Stealth action repository creation
 - [ ] Cross-system communication interfaces
 
@@ -129,6 +291,8 @@ git checkout -b feature/your-feature-name
 2. Maintain interface contracts for cross-system compatibility
 3. Include comprehensive tests for new functionality
 4. Update documentation for architectural changes
+5. **Update submodules regularly** and commit reference changes
+6. Use descriptive commit messages for submodule updates
 
 ## 📄 License
 
