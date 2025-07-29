@@ -296,7 +296,15 @@ git checkout -b feature/your-feature-name
 
 ## 📄 License
 
-[License information to be determined]
+CyberCrawler is released under the **CyberCrawler Source Available License v1.0**.
+
+**What this means:**
+- ✅ **Learning & Education**: View, study, and learn from the source code
+- ✅ **Non-Commercial Use**: Modify and create derivative works for personal/educational purposes  
+- ✅ **Community Collaboration**: Contribute to the project and help with development
+- ❌ **Commercial Use**: Requires separate commercial license (contact: riviera.t.sperduto13@gmail.com)
+
+This license allows collaborative development while protecting commercial rights. See [LICENSE](LICENSE) for full terms.
 
 ---
 

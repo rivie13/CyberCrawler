@@ -1,6 +1,7 @@
 extends GutTest
 
 # Tests for TestCalculator class to verify code coverage system
+const TestCalculator = preload("res://scripts/TestCalculator.gd")
 var calculator: TestCalculator
 
 func before_each():
