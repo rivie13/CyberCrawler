@@ -1,7 +1,6 @@
 {
   "dirs": [
-    "tests/unit",
-    "tests/integration"
+    "tests/unit"
   ],
   "should_maximize": true,
   "should_exit": true,

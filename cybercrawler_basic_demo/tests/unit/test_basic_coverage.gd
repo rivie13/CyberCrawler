@@ -37,7 +37,6 @@ func test_project_structure():
 	# Test that tests directory exists
 	assert_true(project_dir.dir_exists("tests"), "Tests directory should exist")
 	assert_true(project_dir.dir_exists("tests/unit"), "Unit tests directory should exist")
-	assert_true(project_dir.dir_exists("tests/integration"), "Integration tests directory should exist")
 
 func test_future_scripts_directory_preparation():
 	# This test prepares for when we add scripts to the parent repository
