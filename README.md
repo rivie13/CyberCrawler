@@ -85,7 +85,7 @@ cd ..
 git add tower-defense
 
 # Commit with descriptive message
-git commit -m "Update tower-defense to latest commit
+git commit -m "Update tower-defense to latest commit"
 
 - Updated to include latest features/fixes from TD repo
 - Version: [insert commit hash or version info]"
