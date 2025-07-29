@@ -1,0 +1,59 @@
+---
+alwaysApply: true
+---
+
+# Enhanced Parent Repository Rules
+
+## Repository Purpose - STRICTLY ENFORCED
+
+This repository is **EXCLUSIVELY** for the CyberCrawler project. It is the parent repository where the submodules connect together under the main gameloop. This should be the demo which should be the vertical slice of the game.
+
+### What This Repository IS NOT For:
+- **CyberCrawler game development**
+- **CyberCrawler project management**
+- **CyberCrawler tools**
+
+
+### What This Repository IS For:
+- **Connecting the submodules together under the main gameloop**
+- **Maintaining the main gameloop**
+- **testing the main gameloop**
+- **handling menus** : pause menu, main menu, game over menu, etc.
+- **handling CERTAIN UI elements** : HUD, etc.
+- **handling audio** : music, sound effects, etc. (debating on this)
+- **handling input** : keyboard, mouse, controller, etc. (debating on this)
+- **handling save/load** : save/load game, etc.
+- **handling settings** : game settings, etc.
+
+
+## Phase Implementation Guidelines
+
+### Current Phase: Parent Repository Coordination Architecture
+
+This repository implements the **minimal coordination architecture** for orchestrating communication between stealth-action and tower-defense submodules as defined in the Parent Repository Coordination Architecture documentation.
+
+#### Core Requirements (Must Have)
+- **GameCoordinator.gd** - Main orchestrator for submodule communication
+- **SessionManager.gd** - Cross-system state persistence and mission context
+- **Interface scripts** - Communication interfaces to stealth and TD submodules
+- **Main scene coordination** - Entry point that loads and initializes submodules
+- **Menu system management** - Complete menu interface (main, options, loading, credits)
+- **Global UI coordination** - Cross-system UI elements (HUD, alerts, notifications)
+- **Audio management** - Global music, SFX, and voice coordination
+- **Save/Load systems** - Session persistence and game state management
+- **Settings management** - Game configuration and options
+
+#### Current Constraints (Must NOT Have)
+- **Game logic implementation** - No gameplay mechanics or systems
+- **Scene object management** - No terminals, players, enemies, or UI elements from submodules
+- **Asset storage** - No textures, audio, or scene files (except coordination assets)
+- **Dependency provision** - Submodules must be self-contained
+- **Direct gameplay systems** - No stealth mechanics, tower defense logic, or combat systems (this is the submodules job)
+
+
+
+
+
+
+
+
