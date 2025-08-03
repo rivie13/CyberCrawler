@@ -25,110 +25,116 @@ Following [Godot's directory organization principles](https://docs.godotengine.o
 
 ```
 CyberCrawler/ (Parent Repository - FULL GODOT PROJECT)
-├── project.godot                    # Main Godot project configuration
-├── main.tscn                        # Entry point scene
-├── src/                             # All source code (following IDE best practices)
-│   ├── Main.gd                      # Entry point controller
-│   ├── GameCoordinator.gd           # System orchestration
-│   ├── SessionManager.gd            # Cross-system state management
-│   ├── interfaces/
-│   │   ├── StealthActionInterface.gd    # Stealth submodule communication
-│   │   └── TowerDefenseInterface.gd     # TD submodule communication
-│   ├── menus/
-│   │   ├── MainMenu.gd              # Main menu controller
-│   │   ├── OptionsMenu.gd           # Settings and configuration
-│   │   ├── PauseMenu.gd             # In-game pause system
-│   │   └── LoadingScreen.gd         # Transition loading
-│   ├── ui/
-│   │   ├── GlobalHUD.gd             # Cross-system UI elements
-│   │   ├── AlertOverlay.gd          # Alert system UI
-│   │   └── NotificationSystem.gd    # Global notifications
-│   ├── audio/
-│   │   ├── AudioManager.gd          # Global audio coordination
-│   │   └── MusicManager.gd          # Background music system
-│   ├── settings/
-│   │   ├── GameSettings.gd          # Global game settings
-│   │   └── SaveSystem.gd            # Save/load functionality
-│   └── data/
-│       ├── MissionContext.gd        # Mission data structure
-│       ├── SessionData.gd           # Cross-system session state
-│       ├── AlertState.gd            # Alert coordination data
-│       └── PlayerProgress.gd        # Global progression tracking
-├── scenes/                          # All scene files organized by function
-│   ├── main.tscn                    # Main entry point scene
-│   ├── menus/
-│   │   ├── MainMenu.tscn            # Main menu interface
-│   │   ├── OptionsMenu.tscn         # Settings interface
-│   │   ├── PauseMenu.tscn           # Pause overlay
-│   │   ├── LoadingScreen.tscn       # Loading transitions
-│   │   └── CreditsScreen.tscn       # Credits display
-│   ├── coordination/
-│   │   ├── GameCoordinator.tscn     # System coordination scene
-│   │   └── SessionManager.tscn      # Session state management
-│   ├── ui/
-│   │   ├── GlobalHUD.tscn           # Cross-system UI overlay
-│   │   ├── AlertOverlay.tscn        # Alert system interface
-│   │   ├── NotificationPanel.tscn   # Global notifications
-│   │   └── TransitionEffects.tscn   # Scene transition effects
-│   └── audio/
-│       ├── AudioManager.tscn        # Audio system coordination
-│       └── MusicPlayer.tscn         # Background music player
-├── assets/                          # Game assets organized by type
-│   ├── audio/
-│   │   ├── music/
-│   │   │   ├── menu_theme.ogg       # Main menu background music
-│   │   │   ├── ambient_corporate.ogg   # Corporate facility ambience
-│   │   │   └── victory_theme.ogg    # Mission success music
-│   │   ├── sfx/
-│   │   │   ├── ui_sounds/           # Menu and UI sound effects
-│   │   │   ├── alert_sounds/        # Alert system audio
-│   │   │   └── transition_sounds/   # Scene transition audio
-│   │   └── voice/
-│   │       └── narration/           # Voice-over and narration
-│   ├── textures/
+├── cybercrawler_basic_demo/          # MAIN GAME PROJECT (coordination layer)
+│   ├── project.godot                 # Main project config
+│   ├── main.tscn                    # Entry point scene
+│   ├── src/                         # All source code (following IDE best practices)
+│   │   ├── Main.gd                  # Entry point controller
+│   │   ├── GameCoordinator.gd       # System orchestration
+│   │   ├── SessionManager.gd        # Cross-system state management
+│   │   ├── interfaces/
+│   │   │   ├── StealthActionInterface.gd    # Stealth submodule communication
+│   │   │   └── TowerDefenseInterface.gd     # TD submodule communication
+│   │   ├── menus/
+│   │   │   ├── MainMenu.gd          # Main menu controller
+│   │   │   ├── OptionsMenu.gd       # Settings and configuration
+│   │   │   ├── PauseMenu.gd         # In-game pause system
+│   │   │   └── LoadingScreen.gd     # Transition loading
 │   │   ├── ui/
-│   │   │   ├── menus/               # Menu background and elements
-│   │   │   ├── hud/                 # HUD and interface elements
-│   │   │   └── icons/               # UI icons and symbols
-│   │   ├── logos/
-│   │   │   ├── cybercrawler_logo.png    # Main game logo
-│   │   │   └── company_logos/       # Fictional company branding
-│   │   └── effects/
-│   │       ├── particles/           # Particle effect textures
-│   │       └── transitions/         # Screen transition effects
-│   ├── fonts/
-│   │   ├── cyber_font.ttf           # Main UI font (cyberpunk style)
-│   │   ├── terminal_font.ttf        # Terminal/monospace font
-│   │   └── title_font.ttf           # Title and heading font
-│   └── themes/
-│       ├── main_theme.tres          # Global UI theme
-│       ├── menu_theme.tres          # Menu-specific theme
-│       └── cyberpunk_theme.tres     # Cyberpunk aesthetic theme
-├── tests/                           # Comprehensive testing suite
-│   ├── integration/
-│   │   ├── test_submodule_communication.gd     # Cross-system communication
-│   │   ├── test_session_management.gd          # Session state persistence
-│   │   ├── test_alert_system.gd                # Alert coordination
-│   │   ├── test_menu_navigation.gd             # Menu system integration
-│   │   └── test_save_load_system.gd            # Save/load functionality
-│   ├── unit/
-│   │   ├── test_mission_context.gd             # Mission data structures
-│   │   ├── test_game_coordinator.gd            # Coordination logic
-│   │   ├── test_audio_manager.gd               # Audio system
-│   │   └── test_settings_manager.gd            # Settings management
-│   └── mocks/
-│       ├── MockStealthInterface.gd             # Mock stealth system
-│       ├── MockTowerDefenseInterface.gd        # Mock TD system
-│       └── MockSessionData.gd                  # Mock session data
-├── tower-defense/                   # Git submodule - TD game system
-├── stealth-action/                  # Git submodule - 2.5D stealth system
+│   │   │   ├── GlobalHUD.gd         # Cross-system UI elements
+│   │   │   ├── AlertOverlay.gd      # Alert system UI
+│   │   │   └── NotificationSystem.gd # Global notifications
+│   │   ├── audio/
+│   │   │   ├── AudioManager.gd      # Global audio coordination
+│   │   │   └── MusicManager.gd      # Background music system
+│   │   ├── settings/
+│   │   │   ├── GameSettings.gd      # Global game settings
+│   │   │   └── SaveSystem.gd        # Save/load functionality
+│   │   └── data/
+│   │       ├── MissionContext.gd    # Mission data structure
+│   │       ├── SessionData.gd       # Cross-system session state
+│   │       ├── AlertState.gd        # Alert coordination data
+│   │       └── PlayerProgress.gd    # Global progression tracking
+│   ├── scenes/                      # All scene files organized by function
+│   │   ├── main.tscn                # Main entry point scene
+│   │   ├── menus/
+│   │   │   ├── MainMenu.tscn        # Main menu interface
+│   │   │   ├── OptionsMenu.tscn     # Settings interface
+│   │   │   ├── PauseMenu.tscn       # Pause overlay
+│   │   │   ├── LoadingScreen.tscn   # Loading transitions
+│   │   │   └── CreditsScreen.tscn   # Credits display
+│   │   ├── coordination/
+│   │   │   ├── GameCoordinator.tscn # System coordination scene
+│   │   │   └── SessionManager.tscn  # Session state management
+│   │   ├── ui/
+│   │   │   ├── GlobalHUD.tscn       # Cross-system UI overlay
+│   │   │   ├── AlertOverlay.tscn    # Alert system interface
+│   │   │   ├── NotificationPanel.tscn # Global notifications
+│   │   │   └── TransitionEffects.tscn # Scene transition effects
+│   │   └── audio/
+│   │       ├── AudioManager.tscn    # Audio system coordination
+│   │       └── MusicPlayer.tscn     # Background music player
+│   ├── assets/                      # Game assets organized by type
+│   │   ├── audio/
+│   │   │   ├── music/
+│   │   │   │   ├── menu_theme.ogg   # Main menu background music
+│   │   │   │   ├── ambient_corporate.ogg   # Corporate facility ambience
+│   │   │   │   └── victory_theme.ogg # Mission success music
+│   │   │   ├── sfx/
+│   │   │   │   ├── ui_sounds/       # Menu and UI sound effects
+│   │   │   │   ├── alert_sounds/    # Alert system audio
+│   │   │   │   └── transition_sounds/ # Scene transition audio
+│   │   │   └── voice/
+│   │   │       └── narration/       # Voice-over and narration
+│   │   ├── textures/
+│   │   │   ├── ui/
+│   │   │   │   ├── menus/           # Menu background and elements
+│   │   │   │   ├── hud/             # HUD and interface elements
+│   │   │   │   └── icons/           # UI icons and symbols
+│   │   │   ├── logos/
+│   │   │   │   ├── cybercrawler_logo.png    # Main game logo
+│   │   │   │   └── company_logos/   # Fictional company branding
+│   │   │   └── effects/
+│   │   │       ├── particles/       # Particle effect textures
+│   │   │       └── transitions/     # Screen transition effects
+│   │   ├── fonts/
+│   │   │   ├── cyber_font.ttf       # Main UI font (cyberpunk style)
+│   │   │   ├── terminal_font.ttf    # Terminal/monospace font
+│   │   │   └── title_font.ttf       # Title and heading font
+│   │   └── themes/
+│   │       ├── main_theme.tres      # Global UI theme
+│   │       ├── menu_theme.tres      # Menu-specific theme
+│   │       └── cyberpunk_theme.tres # Cyberpunk aesthetic theme
+│   ├── tests/                       # Comprehensive testing suite
+│   │   ├── integration/
+│   │   │   ├── test_submodule_communication.gd     # Cross-system communication
+│   │   │   ├── test_session_management.gd          # Session state persistence
+│   │   │   ├── test_alert_system.gd                # Alert coordination
+│   │   │   ├── test_menu_navigation.gd             # Menu system integration
+│   │   │   └── test_save_load_system.gd            # Save/load functionality
+│   │   ├── unit/
+│   │   │   ├── test_mission_context.gd             # Mission data structures
+│   │   │   ├── test_game_coordinator.gd            # Coordination logic
+│   │   │   ├── test_audio_manager.gd               # Audio system
+│   │   │   └── test_settings_manager.gd            # Settings management
+│   │   └── mocks/
+│   │       ├── MockStealthInterface.gd             # Mock stealth system
+│   │       ├── MockTowerDefenseInterface.gd        # Mock TD system
+│   │       └── MockSessionData.gd                  # Mock session data
+│   ├── external/                    # External submodule references
+│   │   ├── tower_defense.tscn       # Reference to TD submodule
+│   │   └── stealth_action.tscn      # Reference to Stealth submodule
+│   ├── tower-defense/               # Git submodule INSIDE main project
+│   │   └── cybercrawler_basictowerdefense/
+│   └── stealth-action/              # Git submodule INSIDE main project
+│       └── cybercrawler_basicstealthaction/
 ├── documentation/                   # Project documentation
 │   ├── CyberCrawler_Parent_Project_Architecture.md  # This document
 │   ├── Parent_Repository_Coordination_Architecture.md  # Coordination details
 │   ├── Submodule_Integration_Guide.md               # Integration instructions
 │   ├── Testing_Strategy.md                         # Testing approach
 │   └── Development_Workflow.md                     # Development guidelines
-└── .godot/                          # Godot engine cache (gitignored)
+└── .godot/                         # Godot engine cache (gitignored)
 ```
 
 ---
@@ -181,6 +187,7 @@ enum GameState {
     LOADING,
     IN_GAME_STEALTH,
     IN_GAME_TD,
+    IN_GAME_HUBWORLD,
     PAUSED,
     GAME_OVER,
     CREDITS
@@ -400,7 +407,7 @@ class_name GameCoordinator
 extends Node
 
 # Submodule scene paths
-const STEALTH_MAIN_SCENE = "res://stealth-action/main_scenes/StealthMain.tscn"
+const STEALTH_MAIN_SCENE = "res://tower-defense/cybercrawler_basictowerdefense/Main.tscn"
 const TD_MAIN_SCENE = "res://tower-defense/cybercrawler_basictowerdefense/Main.tscn"
 
 # Submodule instances
@@ -705,7 +712,7 @@ config/features=PackedStringArray("4.3")
 run/main_scene="res://scenes/main.tscn"
 
 [submodules]
-stealth_action_path="res://stealth-action/"
+stealth_action_path="res://tower-defense/"
 tower_defense_path="res://tower-defense/cybercrawler_basictowerdefense/"
 
 [rendering]

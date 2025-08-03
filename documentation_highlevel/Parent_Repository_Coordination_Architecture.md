@@ -28,23 +28,32 @@ The parent repository serves **ONLY** as a coordination layer between submodules
 
 ```
 CyberCrawler/ (Parent Repository)
-├── main.tscn                        # Entry point scene
-├── scripts/
-│   ├── GameCoordinator.gd           # Main orchestrator (minimal)
-│   ├── SessionManager.gd            # Cross-system state persistence
-│   ├── interfaces/
-│   │   ├── StealthActionInterface.gd    # Communication interface to stealth submodule
-│   │   └── TowerDefenseInterface.gd     # Communication interface to TD submodule
-│   └── data/
-│       ├── MissionContext.gd            # Mission parameters and context
-│       ├── SessionData.gd               # Cross-system session state
-│       └── AlertState.gd                # Alert system coordination data
-├── tower-defense/                   # Git submodule - TD game system
-├── stealth-action/                  # Git submodule - 2.5D stealth game system
-└── documentation/
-    ├── Parent_Repository_Coordination_Architecture.md  # This document
-    ├── Communication_Protocols.md                      # Signal/interface specs
-    └── Integration_Testing_Guide.md                    # Testing coordination
+├── cybercrawler_basic_demo/          # MAIN GAME PROJECT (coordination layer)
+│   ├── project.godot                 # Main project config
+│   ├── main.tscn                    # Entry point scene
+│   ├── scripts/
+│   │   ├── GameCoordinator.gd       # Main orchestrator (minimal)
+│   │   ├── SessionManager.gd        # Cross-system state persistence
+│   │   ├── DI/Injector.gd           # Dependency injection
+│   │   ├── interfaces/
+│   │   │   ├── StealthActionInterface.gd    # Communication interface to stealth submodule
+│   │   │   └── TowerDefenseInterface.gd     # Communication interface to TD submodule
+│   │   └── data/
+│   │       ├── MissionContext.gd            # Mission parameters and context
+│   │       ├── SessionData.gd               # Cross-system session state
+│   │       └── AlertState.gd                # Alert system coordination data
+│   ├── external/                    # External submodule references
+│   │   ├── tower_defense.tscn       # Reference to TD submodule
+│   │   └── stealth_action.tscn      # Reference to Stealth submodule
+│   ├── tower-defense/               # Git submodule INSIDE main project
+│   │   └── cybercrawler_basictowerdefense/
+│   └── stealth-action/              # Git submodule INSIDE main project
+│       └── cybercrawler_basicstealthaction/
+├── documentation/                   # Project documentation
+│   ├── Parent_Repository_Coordination_Architecture.md  # This document
+│   ├── Communication_Protocols.md                      # Signal/interface specs
+│   └── Integration_Testing_Guide.md                    # Testing coordination
+└── documentation_highlevel/         # High-level architecture docs
 ```
 
 ---
@@ -391,8 +400,8 @@ func merge_mission_results(results: Dictionary) -> Dictionary
 
 - **Communication Protocols**: [Communication_Protocols.md](Communication_Protocols.md)
 - **Integration Testing Guide**: [Integration_Testing_Guide.md](Integration_Testing_Guide.md)  
-- **Stealth-Action Architecture**: [stealth-action/README.md](stealth-action/README.md)
-- **Tower Defense Architecture**: [tower-defense/documentation_highlevel/CyberCrawler_Architecture_Design_Patterns.md](tower-defense/documentation_highlevel/CyberCrawler_Architecture_Design_Patterns.md)
+- **Stealth-Action Architecture**: [cybercrawler_basic_demo/stealth-action/README.md](cybercrawler_basic_demo/stealth-action/README.md)
+- **Tower Defense Architecture**: [cybercrawler_basic_demo/tower-defense/documentation_highlevel/CyberCrawler_Architecture_Design_Patterns.md](cybercrawler_basic_demo/tower-defense/documentation_highlevel/CyberCrawler_Architecture_Design_Patterns.md)
 
 ---
 
@@ -404,6 +413,7 @@ func merge_mission_results(results: Dictionary) -> Dictionary
 | July 2025 | Concurrent execution architecture | Both systems must run simultaneously for true "living world" experience |
 | July 2025 | Minimal parent repo approach | Follows Godot best practices, reduces complexity, improves maintainability |
 | July 2025 | Signal-based communication | Loose coupling, follows Godot patterns, enables better testing |
+| July 2025 | Submodules moved inside main project | Follows Godot best practices, keeps related projects together |
 
 ---
 
