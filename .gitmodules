@@ -1,8 +1,8 @@
-[submodule "cybercrawler_basic_demo/tower-defense"]
+[submodule "tower-defense"]
 	path = cybercrawler_basic_demo/tower-defense
 	url = https://github.com/rivie13/CyberCrawler_basic_tower_defense_demo.git
 	branch = main
-[submodule "cybercrawler_basic_demo/stealth-action"]
+[submodule "stealth-action"]
 	path = cybercrawler_basic_demo/stealth-action
 	url = https://github.com/rivie13/cybercrawler-stealth-action.git
 	branch = main
