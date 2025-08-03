@@ -26,11 +26,22 @@ This is the **parent repository** that orchestrates the complete CyberCrawler ex
 ### Repository Structure
 ```
 CyberCrawler/ (Parent Repository)
-├── tower-defense/          # Submodule: Core TD gameplay system
-├── stealth-action/         # Submodule: 2.5D stealth gameplay system  
-├── hub-system/            # Submodule: Mission selection and upgrades
-├── shared-assets/         # Submodule: Common assets and resources
-└── integration-layer/     # Submodule: Cross-system communication
+├── cybercrawler_basic_demo/          # MAIN GAME PROJECT (coordination layer)
+│   ├── project.godot                 # Main project config
+│   ├── main.tscn                    # Entry point scene
+│   ├── scripts/
+│   │   ├── GameCoordinator.gd       # Orchestrates submodules
+│   │   ├── DI/Injector.gd           # Dependency injection
+│   │   └── interfaces/              # Communication contracts
+│   ├── external/                    # External submodule references
+│   │   ├── tower_defense.tscn       # Reference to TD submodule
+│   │   └── stealth_action.tscn      # Reference to Stealth submodule
+│   ├── tower-defense/               # Git submodule INSIDE main project
+│   │   └── cybercrawler_basictowerdefense/
+│   └── stealth-action/              # Git submodule INSIDE main project
+│       └── cybercrawler_basicstealthaction/
+├── documentation/                    # Project documentation
+└── documentation_highlevel/         # High-level architecture docs
 ```
 
 ### Development Workflow
@@ -45,8 +56,8 @@ CyberCrawler/ (Parent Repository)
 
 **Update single submodule to latest commit:**
 ```bash
-git submodule update --remote tower-defense
-git add tower-defense
+git submodule update --remote cybercrawler_basic_demo/tower-defense
+git add cybercrawler_basic_demo/tower-defense
 git commit -m "Update tower-defense to latest version"
 ```
 
@@ -71,21 +82,21 @@ cat .gitmodules
 #### Step 2: Update to Latest Commit on Tracked Branch
 ```bash
 # Update specific submodule (recommended)
-git submodule update --remote tower-defense
+git submodule update --remote cybercrawler_basic_demo/tower-defense
 
 # Alternative: Navigate into submodule and pull directly
-cd tower-defense
+cd cybercrawler_basic_demo/tower-defense
 git pull origin main
-cd ..
+cd ../..
 ```
 
 #### Step 3: Commit the Updated Reference
 ```bash
 # Stage the submodule changes
-git add tower-defense
+git add cybercrawler_basic_demo/tower-defense
 
 # Commit with descriptive message
-git commit -m "Update tower-defense to latest commit"
+git commit -m "Update tower-defense to latest commit
 
 - Updated to include latest features/fixes from TD repo
 - Version: [insert commit hash or version info]"
@@ -105,14 +116,14 @@ git push origin dev
 #### Update to Specific Commit
 ```bash
 # Method 1: Traditional approach
-cd tower-defense
+cd cybercrawler_basic_demo/tower-defense
 git checkout <specific-commit-hash>
-cd ..
-git add tower-defense
+cd ../..
+git add cybercrawler_basic_demo/tower-defense
 git commit -m "Update tower-defense to specific commit <hash>"
 
 # Method 2: Direct hash update (one-liner)
-git update-index --cacheinfo 160000 <commit-hash> tower-defense
+git update-index --cacheinfo 160000 <commit-hash> cybercrawler_basic_demo/tower-defense
 git commit -m "Update tower-defense to commit <hash>"
 ```
 
@@ -158,8 +169,8 @@ cd /path/to/separate/tower-defense-repo
 # Make changes, commit, push
 
 cd /path/to/CyberCrawler
-git submodule update --remote tower-defense
-git add tower-defense
+git submodule update --remote cybercrawler_basic_demo/tower-defense
+git add cybercrawler_basic_demo/tower-defense
 git commit -m "Update tower-defense: [describe changes]"
 ```
 
@@ -178,10 +189,11 @@ git commit -m "Update tower-defense: [describe changes]"
 #### Submodule Changes Not Showing
 ```bash
 # Ensure submodule is properly initialized
-git submodule update --init tower-defense
+git submodule update --init cybercrawler_basic_demo/tower-defense
+git submodule update --init cybercrawler_basic_demo/stealth-action
 
 # Check if submodule is in detached HEAD state
-cd tower-defense
+cd cybercrawler_basic_demo/tower-defense
 git branch -a
 git checkout main  # if needed
 ```
@@ -189,16 +201,17 @@ git checkout main  # if needed
 #### Merge Conflicts in Submodules
 ```bash
 # If submodule has merge conflicts
-cd tower-defense
+cd cybercrawler_basic_demo/tower-defense
 git checkout main  # Reset to clean state
-cd ..
-git add tower-defense
+cd ../..
+git add cybercrawler_basic_demo/tower-defense
 ```
 
 #### Reset Submodule to Clean State
 ```bash
 # Reset submodule to match parent repo's recorded commit
-git submodule update --force tower-defense
+git submodule update --force cybercrawler_basic_demo/tower-defense
+git submodule update --force cybercrawler_basic_demo/stealth-action
 ```
 
 ## 🎯 Design Pillars
@@ -224,6 +237,7 @@ The world tells a story of technological oppression and human rebellion through 
 ### Phase 2: Multi-Repo Architecture 🚧
 - [x] Parent repository created
 - [x] Tower defense submodule integration (tracking main branch)
+- [x] Submodules moved inside main game project
 - [ ] Stealth action repository creation
 - [ ] Cross-system communication interfaces
 
@@ -255,7 +269,8 @@ The world tells a story of technological oppression and human rebellion through 
 
 ## 📚 Documentation
 
-- **Tower Defense Architecture**: See `tower-defense/` submodule documentation
+- **Tower Defense Architecture**: See `cybercrawler_basic_demo/tower-defense/` submodule documentation
+- **Stealth Action Architecture**: See `cybercrawler_basic_demo/stealth-action/` submodule documentation
 - **Game Design Document**: Comprehensive design in repository docs
 - **API Documentation**: Interface contracts and system interactions
 - **Development Workflow**: Git flow and contribution guidelines
@@ -282,7 +297,7 @@ git checkout -b feature/your-feature-name
 
 ### Running the Game
 1. Open Godot 4.x
-2. Import the project from the parent directory
+2. Import the project from the `cybercrawler_basic_demo/` directory
 3. Run the main scene to experience the integrated gameplay
 
 ## 🤝 Contributing
